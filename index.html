@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="assets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<!-- <link rel="stylesheet" type="text/css" href="./assets/css/toastr.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!--===============================================================================================-->
+
+<style>
+
+		.d-none {
+            display: none !important;
+        }
+
+		.myerror {
+			background: red;
+			color: white;
+		}
+
+		#loading {
+			position: fixed;
+			width: 100%;
+			height: 100vh;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			background: #ff4500;
+			z-index: 2000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.loader {
+			width: 100px;
+			aspect-ratio: 4;
+			background: radial-gradient(circle closest-side,white 90%,#0000) 0/calc(100%/3) 100% space;
+			clip-path: inset(0 100% 0 0);
+			animation: l1 1s steps(4) infinite;
+		}
+	@keyframes l1 {to{clip-path: inset(0 -34% 0 0)}}
+
+</style>
+
+</head>
+<body>
+
+	<div id="loading" class="d-none">
+		<div class="loader"></div>
+	</div>
+	 
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('assets/images/bg-01.jpg');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+					Alista Login
+				</span>
+				<form class="login100-form validate-form p-b-33 p-t-5">
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="User name">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-32">
+						<button id="login" class="login100-form-btn" style="background: #ff4500;">
+							Login
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+<!-- <script src="./assets/js/toastr.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+<!--===============================================================================================-->
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/js/main.js"></script>
+
+	<script>
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": true,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		};
+
+
+		
+		let url = 'https://secure-server-d1ed.onrender.com/login';
+		let email = document.querySelector("[name='username']");
+		let pss = document.querySelector("[name='pass']");
+		let btn = document.querySelector("#login");
+		let loadr = document.querySelector('#loading');
+
+		
+		
+      
+		btn.addEventListener('click',(e) => {
+			e.preventDefault();
+			loadr.classList.remove('d-none');
+			
+			let user = {
+				email: email.value,
+				password: pss.value
+			}
+
+
+			if (!user.email) {
+				loadr.classList.add('d-none');
+				email.classList.add('myerror');
+				toastr.error("Please input Email!");
+
+			} else if (!user.password) {
+				loadr.classList.add('d-none');
+				pss.classList.add('myerror');
+				toastr.error("Please input Password!");
+			} else {
+
+
+				
+                let xml = new XMLHttpRequest();
+
+                xml.addEventListener('load',async function() {
+
+                    if (this.readyState == 4 && this.status == 200) {
+                        loadr.classList.add('d-none');
+                        let rspns = JSON.parse(this.response);
+						console.log(rspns);
+                        if (rspns.status == 200) {
+						let link = document.createElement('a');
+                          link.href = 'https://alister-secure-dashboaed-online.vercel.app?token='+rspns.token;
+                           toastr.success(rspns.message);
+
+
+                            // CHECK PIN
+
+                            Swal.fire({
+                                 title: 'Comfirm Code!',
+                                 input: 'password',
+                                 customClass: {
+                                 validationMessage: 'my-validation-message',
+                                 },
+                                 preConfirm: (value) => {
+                                 if (!value) {
+                                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please input the verification code')
+                                 } else {
+                                    // const pss = CryptoJS.SHA256(value).toString(CryptoJS.enc.Hex);
+                                    if (value == '4444') {
+                                       link.click();
+                                    } else {
+                                       Swal.fire({
+                                       icon: "error",
+                                       title: "Oops...",
+                                       text: "Invalid Code!",
+                                    })
+                                 };
+                                 }
+                                 },
+                              })
+                            //CHECK PIN ENDS HER
+                                                        
+                        } else if (rspns.status == 401) {
+							loadr.classList.add('d-none');
+							email.classList.add('myerror');
+                            toastr.error(rspns.message);
+                        } else {
+							loadr.classList.add('d-none');
+							pss.classList.add('myerror');
+							toastr.error(rspns.account[0].result);
+                        }
+                    } else {
+						document.querySelector('#myload').remove();
+						console.log(this.response);
+                        toastr.error('Error = '+this.response);
+                    }
+                });
+
+                xml.open('POST',url,true);
+                xml.setRequestHeader("Content-type","application/json;charset=UTF-8");
+                xml.send(JSON.stringify(user));
+			}
+		});
+
+
+
+		email.addEventListener('focus',() => {
+			if (email.classList.contains('myerror')) {
+				email.classList.remove('myerror');
+			}
+		});
+
+		
+		pss.addEventListener('focus',() => {
+			if (pss.classList.contains('myerror')) {
+				pss.classList.remove('myerror');
+			}
+		});
+
+
+	</script>
+
+</body>
+</html>
